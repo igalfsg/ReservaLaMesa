@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content"
+
+    android:id="@+id/hello">
+
+    <TextView
+        android:id="@+id/party_size_text_view"
+        android:layout_width="wrap_content"
+        android:textColor="#000"
+        android:layout_height="wrap_content"
+        android:text="Numero De gente" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo de Espera"
+        android:textColor="#000"
+        android:id="@+id/wait_time_text_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

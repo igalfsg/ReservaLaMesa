@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/avatar_image_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_launcher"/>
+
+    <LinearLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/avatar_image_view"
+
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:layout_toLeftOf="@+id/ping_image_button"
+        android:layout_toStartOf="@+id/ping_image_button"
+        android:layout_alignBottom="@+id/avatar_image_view"
+        android:layout_alignTop="@+id/avatar_image_view">
+
+        <TextView
+            android:id="@+id/name_textview"
+            android:paddingTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer one"
+            android:textAllCaps="true"
+            android:textSize="15dp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/status_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En Espera"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:id="@+id/phone_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:id="@+id/note_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notas"
+            android:textSize="12dp"
+            />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/ping_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_k_notify_icon"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/seat_image_button"
+       />
+
+    <ImageButton
+        android:id="@+id/seat_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_hair_barbers_chair_icon"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/ready_image_button"
+        />
+
+    <ImageButton
+        android:id="@+id/ready_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_action_done"
+        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/cancel_image_button"
+        android:layout_toLeftOf="@+id/cancel_image_button"
+        android:layout_toStartOf="@+id/cancel_image_button"/>
+
+    <ImageButton
+        android:id="@+id/cancel_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_action_content_clear"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Reserva La Mesa</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_new_customer">NewCustomerActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string-array name="number_of_customer">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="periods_time">
+        <item>Ultima Hora</item>
+        <item>Ultimo dia</item>
+        <item>Ultimos 3 dias</item>
+        <item>Ultimos 10 dias</item>
+        <item>Ultimos 30 dias</item>
+    </string-array>
+</resources>
