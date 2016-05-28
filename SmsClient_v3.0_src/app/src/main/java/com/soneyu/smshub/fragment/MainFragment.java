@@ -31,6 +31,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.soneyu.App;
+import com.soneyu.core.GcmSender;
 import com.soneyu.smshub.R;
 import com.soneyu.smshub.data.Customer;
 import com.soneyu.smshub.data.CustomerAdapter2;
@@ -656,6 +657,8 @@ public class MainFragment extends Fragment
 
     private void addUser(String name, String phone, final String people, String note, final String uuid)
     {
+        GcmSender.setTopicMessage(name,phone+" "+phone+" added ");
+
         Random rand = new Random();
         Calendar cal = Calendar.getInstance();
         int second = cal.get(Calendar.SECOND);

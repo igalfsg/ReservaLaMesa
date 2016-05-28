@@ -25,6 +25,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.soneyu.core.QuickstartPreferences;
+import com.soneyu.gcmplayground.Constants;
+import com.soneyu.gcmplayground.RegistrationIntentService;
+import com.soneyu.gcmplayground.constants.RegistrationConstants;
 import com.soneyu.smshub.fragment.ActivityFragment;
 import com.soneyu.smshub.fragment.MainFragment;
 import com.soneyu.smshub.fragment.OnFragmentInteractionListener;
@@ -100,10 +103,21 @@ public class MainActivity extends ActionBarActivity
         wl.acquire();
     }
 
+    public static void registerUser(final Context mContext) {
+
+        Intent intent = new Intent(mContext, RegistrationIntentService.class);
+        intent.putExtra(RegistrationConstants.SENDER_ID, mContext.getString(R.string.gcm_defaultSenderId));
+        mContext.startService(intent);
+
+    }
+
     @Override
     protected void onResume()
     {
         super.onResume();
+
+        registerUser(MainActivity.this);
+        Log.d(Constants.GCM_DEBUG,"Registration user ");
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
     }

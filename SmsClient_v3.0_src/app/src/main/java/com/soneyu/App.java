@@ -44,10 +44,11 @@ public class App extends Application
 
     public static String getMacAddress()
     {
-        WifiManager manager = (WifiManager) app.getSystemService(Context.WIFI_SERVICE);
-        WifiInfo info = manager.getConnectionInfo();
-        String address = info.getMacAddress().toLowerCase();//direccion
-        return address;
+//        WifiManager manager = (WifiManager) app.getSystemService(Context.WIFI_SERVICE);
+//        WifiInfo info = manager.getConnectionInfo();
+//        String address = info.getMacAddress().toLowerCase();//direccion
+        //return address;
+        return "AA:BB:CC";
     }
 
     public static String prettySeconds(int seconds)
