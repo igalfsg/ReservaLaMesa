@@ -16,16 +16,24 @@
 
 package com.soneyu.core;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.soneyu.smshub.R;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -37,60 +45,60 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        /*
+
         super.onCreate(savedInstanceState);
-        setContentView(R.customer_item.activity_main);
-
-        Button btn = (Button) findViewById(R.id.activate_button);
-
-        final ProgressDialog prgDialog = new ProgressDialog(this);
-        prgDialog.setCancelable(false);
-        prgDialog.setMessage("Activating...");
-
-
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (checkPlayServices())
-                {
-                    prgDialog.show();
-                    // Start IntentService to register this application with GCM.
-                    Intent intent = new Intent(MainActivity.this, RegistrationIntentService.class);
-                    startService(intent);
-                }
-            }
-        });
-
-
-        mRegistrationBroadcastReceiver = new BroadcastReceiver()
-        {
-            @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                try
-                {
-                    SharedPreferences sharedPreferences =
-                            PreferenceManager.getDefaultSharedPreferences(context);
-                    boolean sentToken = sharedPreferences
-                            .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-                    if (sentToken)
-                    {
-                        prgDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Activate ok", Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        prgDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Activate error", Toast.LENGTH_LONG).show();
-                    }
-                }catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-            }
-        };*/
+//        setContentView(R.customer_item.activity_main);
+//
+//        Button btn = (Button) findViewById(R.id.activate_button);
+//
+//        final ProgressDialog prgDialog = new ProgressDialog(this);
+//        prgDialog.setCancelable(false);
+//        prgDialog.setMessage("Activating...");
+//
+//
+//        btn.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                if (checkPlayServices())
+//                {
+//                    prgDialog.show();
+//                    // Start IntentService to register this application with GCM.
+//                    Intent intent = new Intent(MainActivity.this, RegistrationIntentService.class);
+//                    startService(intent);
+//                }
+//            }
+//        });
+//
+//
+//        mRegistrationBroadcastReceiver = new BroadcastReceiver()
+//        {
+//            @Override
+//            public void onReceive(Context context, Intent intent)
+//            {
+//                try
+//                {
+//                    SharedPreferences sharedPreferences =
+//                            PreferenceManager.getDefaultSharedPreferences(context);
+//                    boolean sentToken = sharedPreferences
+//                            .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+//                    if (sentToken)
+//                    {
+//                        prgDialog.dismiss();
+//                        Toast.makeText(MainActivity.this, "Activate ok", Toast.LENGTH_LONG).show();
+//                    }
+//                    else
+//                    {
+//                        prgDialog.dismiss();
+//                        Toast.makeText(MainActivity.this, "Activate error", Toast.LENGTH_LONG).show();
+//                    }
+//                }catch (Exception ex)
+//                {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        };
 
     }
 

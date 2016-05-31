@@ -1,12 +1,12 @@
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.soneyu.smshub.R;
 
 public class MyGcmListenerService extends GcmListenerService {
-//no se usa
+    //no se usa
     private static final String TAG = "MyGcmListenerService";
 
     /**
@@ -47,6 +47,15 @@ public class MyGcmListenerService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
+        if (from.startsWith("/topics/client")) {
+            //message received from hub or server to client
+            sendNotification("SMS Client", message);
+        } else if (from.startsWith("/topics/global")) {
+            // message received from hub or server send to all user
+
+            //DO SOMTHING HERE
+        }
+
         /**
          * Production applications would usually process the message here.
          * Eg: - Syncing with server.
@@ -58,8 +67,6 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification("SMS Client", message);
-
     }
 
 
@@ -74,7 +81,7 @@ public class MyGcmListenerService extends GcmListenerService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("SMS Client" + phoneNo)

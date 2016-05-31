@@ -33,4 +33,6 @@
         <item>Ultimos 10 dias</item>
         <item>Ultimos 30 dias</item>
     </string-array>
+
+    <string name="gcm_semder_id">806807556870</string>
 </resources>

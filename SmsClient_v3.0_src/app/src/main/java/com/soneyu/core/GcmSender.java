@@ -16,32 +16,32 @@ import java.net.URL;
  */
 public class GcmSender {
 
-    public static final String API_KEY = "AIzaSyDNXYulwWKygiqiI73K6KMX_3d_nqER5_Q";
- //   public static final String API_KEY = "AIzaSyD1ImZrrJ7w-8LgUR7Hydgy3Etm9vHDFtA";
+    public static final String API_KEY = "AIzaSyAIa11ACA2KuhbEKAozEoKM6PDW8iQbRco";
 
 
-
-    public static void setTopicMessage(final String message,final String body )
-    {
-        AsyncTask asyncTask=new AsyncTask() {
+    public static void setTopicMessage(final String message, final String body) {
+        AsyncTask asyncTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] params) {
-                sendNotification(message,body);
+                sendNotification(message, body);
                 return null;
             }
         };
 
         asyncTask.execute();
     }
-    private static void sendNotification(String message,String body) {
+
+    private static void sendNotification(String message, String body) {
 
         try {
             // Prepare JSON containing the GCM message content. What to send and where to send.
             JSONObject jGcmData = new JSONObject();
             JSONObject jData = new JSONObject();
             jData.put("message", message);
-            jData.put("body",body);
-            jGcmData.put("to", "/topics/global");
+            jData.put("body", body);
+
+            //set to is "hub" , just only send to hub, client not receive this.
+            jGcmData.put("to", "/topics/hub");
 
             jGcmData.put("data", jData);
 
@@ -59,7 +59,7 @@ public class GcmSender {
             // Read GCM response.
             InputStream inputStream = conn.getInputStream();
             String resp = "Response";
-                    //IOUtils.toString(inputStream);
+            //IOUtils.toString(inputStream);
             System.out.println(resp);
             System.out.println("Check your device/emulator for notification or logcat for " +
                     "confirmation of the receipt of the GCM message.");

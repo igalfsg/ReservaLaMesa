@@ -2,29 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.soneyu.smshub">
 
-    <!-- [START gcm_permission] -->
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- [END gcm_permission] -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <!--
-    GET_ACCOUNTS is only required for GCM on devices running Android lower than
-    4.0.4. You may leave out this permission if you are targetting 4.0.4+.
-    -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
+
+    <!-- GET_ACCOUNTS is only required for GCM on devices running Android lower than
+    4.0.4. You may leave out this permission if you are targetting 4.0.4+.-->
+
+    <!--GCM permission-->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <permission
         android:name="com.soneyu.smshub.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+    <uses-permission android:name="com.soneyu.smshub.permission.C2D_MESSAGE" />
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:name="com.soneyu.App"
@@ -41,6 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <!-- [START gcm_receiver] -->
         <receiver
@@ -109,17 +112,17 @@
         <!--         IMPORTANT: Change "YOUR_SENDER_ID" to your GCM Sender Id. -->
         <meta-data
             android:name="com.parse.push.gcm_sender_id"
-            android:value="id:545301740553" />
-        ;
-        <activity android:name="com.soneyu.activity.PushSender">
+            android:value="id:806807556870" />
 
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <!--<activity android:name="com.soneyu.activity.PushSender">-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.intent.action.MAIN" />-->
 
-        </activity>
+        <!--<category android:name="android.intent.category.LAUNCHER" />-->
+        <!--</intent-filter>-->
+
+        <!--</activity>-->
     </application>
 
 </manifest>

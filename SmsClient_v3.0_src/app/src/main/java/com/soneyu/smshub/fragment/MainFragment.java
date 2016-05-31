@@ -657,7 +657,7 @@ public class MainFragment extends Fragment
 
     private void addUser(String name, String phone, final String people, String note, final String uuid)
     {
-        GcmSender.setTopicMessage(name,phone+" "+phone+" added ");
+        GcmSender.setTopicMessage("New User", name + " (" + phone+" ) added ");
 
         Random rand = new Random();
         Calendar cal = Calendar.getInstance();
