@@ -1,0 +1,152 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:layout_margin="16dp"
+tools:context="com.soneyu.smshub.fragment.ReportFragment">
+
+<!-- TODO: Update blank fragment layout -->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/abc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/layout">
+
+        <TextView
+            android:id="@+id/textView51"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="          Mensajes        "
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/textView61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView51"
+            android:layout_marginTop="40dp"
+
+            android:layout_toLeftOf="@+id/textView51"
+            android:layout_toStartOf="@+id/textView51"
+            android:text="Agregar Cliente"
+            android:textColor="#000"
+            android:textSize="15sp"/>
+        <EditText
+            android:layout_width="182dp"
+            android:layout_height="40dp"
+            android:id="@+id/client_add_txt"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/textView61"
+            android:layout_toRightOf="@+id/textView61"
+            android:text="Bienvenido %s por favor espere en lo que su mesa esta lista."
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+
+
+        <TextView
+            android:id="@+id/textView101"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView61"
+            android:layout_alignStart="@+id/textView61"
+            android:layout_below="@+id/textView61"
+            android:layout_marginTop="20dp"
+            android:text="Cancelar Cliente"
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:layout_width="182dp"
+            android:layout_height="40dp"
+            android:id="@+id/client_cancel_txt"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/textView101"
+            android:layout_alignRight="@+id/client_add_txt"
+            android:text="Lo Sentimos %s su mesa ha sido cancelada, visitenos pronto."
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView101"
+            android:layout_alignStart="@+id/textView101"
+            android:layout_below="@+id/textView101"
+            android:layout_marginTop="20dp"
+            android:text="Ping Cliente"
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:layout_width="182dp"
+            android:layout_height="40dp"
+            android:id="@+id/client_ping_txt"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/textView121"
+            android:layout_alignRight="@+id/client_add_txt"
+            android:text="%s, le recordamos que su mesa esta lista. Favor de avisarle a nuestra hostess."
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/textView141"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView121"
+            android:layout_alignStart="@+id/textView121"
+            android:layout_below="@+id/textView121"
+            android:layout_marginTop="20dp"
+            android:text="Listo Cliente"
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:layout_width="182dp"
+            android:layout_height="40dp"
+            android:id="@+id/client_ready_txt"
+            android:layout_marginLeft="10dp"
+            android:layout_alignBottom="@+id/textView141"
+            android:layout_alignRight="@+id/client_add_txt"
+            android:text="Hola %s, su mesa esta lista. Favor de avisarle a nuestra hostess."
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:id="@+id/save_messages"
+            android:onClick="Guardar"
+            android:layout_centerVertical="true"
+            android:layout_alignRight="@+id/textView101"
+            android:layout_alignEnd="@+id/textView101" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resetear"
+            android:id="@+id/reset_messages"
+            android:onClick="Guardar"
+            android:layout_alignTop="@+id/save_messages"
+            android:layout_alignRight="@+id/textView51"
+            android:layout_alignEnd="@+id/textView51" />
+
+
+    </RelativeLayout>
+</RelativeLayout>
+
+</FrameLayout>

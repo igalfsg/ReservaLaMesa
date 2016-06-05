@@ -117,10 +117,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         List<NavigationItem> items = new ArrayList<NavigationItem>();
         items.add(new NavigationItem("Lista De Espera", getResources().getDrawable(R.drawable.ic_action_ic_home_black_48dp)));
         items.add(new NavigationItem("Clientes Sentados", getResources().getDrawable(R.drawable.ic_action_hair_barbers_chair_icon)));
-        //items.add(new NavigationItem("Tiempo De Espera", getResources().getDrawable(R.drawable.ic_action_text_report)));
         //items.add(new NavigationItem("Graficas", getResources().getDrawable(R.drawable.ic_action_editor_insert_chart)));
-        items.add(new NavigationItem("Reporte General", getResources().getDrawable(R.drawable.ic_action_text_report)));
+        items.add(new NavigationItem("Reporte General", getResources().getDrawable(R.drawable.ic_action_editor_insert_chart)));
         items.add(new NavigationItem("Reporte Por Dia", getResources().getDrawable(R.drawable.ic_action_text_report)));
+        items.add(new NavigationItem("Mensajes", getResources().getDrawable(R.drawable.ic_action_text_report)));
         return items;
     }
 

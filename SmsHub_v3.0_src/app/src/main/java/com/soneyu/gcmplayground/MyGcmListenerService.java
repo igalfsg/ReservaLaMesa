@@ -37,10 +37,10 @@ public class MyGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         super.onMessageReceived(from, data);
-
+        //not used brah
         String message = data.getString("message");
         Log.i(TAG, "From: " + from);
-        Log.i(TAG, "Message: " + message);
+        Log.i(TAG, "Message: thor was here" + message);
 
 
         if (from.startsWith("/topics/hub")) {

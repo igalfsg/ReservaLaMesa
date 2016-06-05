@@ -24,6 +24,8 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.soneyu.App;
+import com.soneyu.core.GcmSender;
+import com.soneyu.core.MainActivity;
 import com.soneyu.smshub.R;
 import com.soneyu.smshub.fragment.MainFragment;
 
@@ -109,6 +111,30 @@ public class CustomerAdapter2 extends RecyclerView.Adapter<CustomerAdapter2.View
                             cliente.put("salida", second);
                             cliente.put("status", "served");
                             cliente.saveInBackground();
+
+                            //push
+                            final String name = cliente.getString("nombre");
+                            final String phone = cliente.getString("tel");
+                            if(!phone.equals("")) {
+                                ParseQuery<ParseObject> query = ParseQuery.getQuery("Usuarios");
+                                query.whereEqualTo("uuid", App.getMacAddress());
+                                query.fromLocalDatastore();
+                                query.getFirstInBackground(new GetCallback<ParseObject>() {
+                                    public void done(ParseObject object, ParseException e) {
+                                        if (object == null) {
+                                            Log.d("score", "The getFirst request failed.");
+                                            String mensaje = ("Hola %s, su mesa esta lista. Favor de avisarle a nuestra hostess.").replace("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+                                        } else {
+                                            Log.d("score", "Retrieved the object.");
+                                            String mensaje = object.getString("ready").replaceAll("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+
+                                        }
+                                    }
+                                });
+                            }
+
                             cus.setStatus("served");
                             notifyDataSetChanged();
                         } else {
@@ -140,6 +166,7 @@ public class CustomerAdapter2 extends RecyclerView.Adapter<CustomerAdapter2.View
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Clientes");
                 query.whereEqualTo("id", cus.getId());
                 query.whereEqualTo("restaurant", App.getMacAddress());
+                query.fromLocalDatastore();
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     @Override
                     public void done(ParseObject cliente, ParseException e) {
@@ -147,7 +174,31 @@ public class CustomerAdapter2 extends RecyclerView.Adapter<CustomerAdapter2.View
                             cliente.put("status", "ping");
                             cliente.saveInBackground();
                             cus.setStatus("ping");
+
+                            //push
+                            final String name = cliente.getString("nombre");
+                            final String phone = cliente.getString("tel");
+                            if(!phone.equals("")) {
+                                ParseQuery<ParseObject> query = ParseQuery.getQuery("Usuarios");
+                                query.whereEqualTo("uuid", App.getMacAddress());
+                                query.fromLocalDatastore();
+                                query.getFirstInBackground(new GetCallback<ParseObject>() {
+                                    public void done(ParseObject object, ParseException e) {
+                                        if (object == null) {
+                                            Log.d("score", "The getFirst request failed.");
+                                            String mensaje = ("%s, le recordamos que su mesa esta lista. Favor de avisarle a nuestra hostess.").replace("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+                                        } else {
+                                            Log.d("score", "Retrieved the object.");
+                                            String mensaje = object.getString("ping").replaceAll("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+
+                                        }
+                                    }
+                                });
+                            }
                             notifyDataSetChanged();
+
                         } else {
                             Toast.makeText(mContext, "No Se Pudo Contactar al Servidor", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
@@ -185,17 +236,13 @@ public class CustomerAdapter2 extends RecyclerView.Adapter<CustomerAdapter2.View
                 pushQuery.whereEqualTo("username", "cell");
                 String message = "says Hi!";
 
-                //push stuff
-                ParsePush push = new ParsePush();
-                push.setQuery(pushQuery); // Set our Installation query
-                push.setMessage(message);
-                push.sendInBackground();
-                Toast.makeText(mContext, "eres un chingon", Toast.LENGTH_LONG).show();
+
 
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Clientes");
                 query.whereEqualTo("id", cus.getId());
                 query.whereEqualTo("restaurant", App.getMacAddress());
+                query.fromLocalDatastore();
                 query.getFirstInBackground(new GetCallback<ParseObject>() {
                     @Override
                     public void done(ParseObject cliente, ParseException e) {
@@ -210,6 +257,31 @@ public class CustomerAdapter2 extends RecyclerView.Adapter<CustomerAdapter2.View
                             cus.setStatus("cancel");
                             customers.remove(cus);
                             notifyDataSetChanged();
+
+                            //push
+                            final String name = cliente.getString("nombre");
+                            final String phone = cliente.getString("tel");
+                            if(!phone.equals("")) {
+                               // Toast.makeText(mContext, "No Se Pudo Contactar al Servidor " + phone, Toast.LENGTH_LONG).show();
+
+                                ParseQuery<ParseObject> query = ParseQuery.getQuery("Usuarios");
+                                query.whereEqualTo("uuid", App.getMacAddress());
+                                query.fromLocalDatastore();
+                                query.getFirstInBackground(new GetCallback<ParseObject>() {
+                                    public void done(ParseObject object, ParseException e) {
+                                        if (object == null) {
+                                            Log.d("score", "The getFirst request failed.");
+                                            String mensaje = ("Lo Sentimos %s su mesa ha sido cancelada, visitenos pronto.").replace("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+                                        } else {
+                                            Log.d("score", "Retrieved the object.");
+                                            String mensaje = object.getString("cancel").replaceAll("%s", name);
+                                            GcmSender.setTopicMessage(phone, mensaje);
+
+                                        }
+                                    }
+                                });
+                            }
 
                         } else {
                             Toast.makeText(mContext, "No Se Pudo Contactar al Servidor", Toast.LENGTH_LONG).show();

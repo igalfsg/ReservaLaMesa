@@ -64,6 +64,7 @@ public class RegistrationIntentService extends IntentService {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
         for (String topic : TOPICS) {
             pubSub.subscribe(token, "/topics/" + topic, null);
+            Log.d("#Tag", topic);
         }
     }
 }

@@ -51,6 +51,10 @@ public class MainFragment extends Fragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public String add_message = "test";
+    public String cancel_message;
+    public String ready_message;
+    public String ping_message;
     private TextView status_textview;
     private Button register_button;
     private ProgressBar loading_prg;
@@ -164,94 +168,7 @@ public class MainFragment extends Fragment
                 }
             }
         });
-        /*
-        Ion.with(this)
-                .load(String.format(Global.SMS_CLIENT_STATUS, App.getMacAddress()))
-                .setLogging("su", Log.DEBUG)
-                .noCache()
-                .as(SmsClientStatusResponse.class)
-                .setCallback(new FutureCallback<SmsClientStatusResponse>()
-                {
-                    @Override
-                    public void onCompleted(Exception e, SmsClientStatusResponse result)
-                    {
-                        if (e == null && result != null)
-                        {
-                            if (result.getStatus() == 200)
-                            {
-                                SmsClient client = result.getData();
 
-                                if (client.isActivated())
-                                {
-                                    device_activated = true;
-                                    runOnUIThreadIfVisible(new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            float_button.setVisibility(View.VISIBLE);
-                                            status_textview.setText("Dispositivo activado");
-                                            //status_textview.setVisibility(View.VISIBLE);
-                                            loadCustomer(App.getMacAddress());
-                                            loadLastHourAvgWaitTime();
-                                            loading_prg.setVisibility(View.INVISIBLE);
-
-                                        }
-                                    });
-
-                                    // we should show somethings here
-                                }
-                                else
-                                {
-                                    runOnUIThreadIfVisible(new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            float_button.setVisibility(View.INVISIBLE);
-                                            status_textview.setText("Esperando aprovacion de dispositivo");
-                                            status_textview.setVisibility(View.VISIBLE);
-                                            loading_prg.setVisibility(View.INVISIBLE);
-                                        }
-                                    });
-                                }
-                            }
-                            else
-                            {
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        status_textview.setText("Su dispositivo no esta registrado Favor de contactarnos");
-                                        status_textview.setVisibility(View.VISIBLE);
-                                        loading_prg.setVisibility(View.INVISIBLE);
-                                        register_button.setVisibility(View.VISIBLE);
-                                        restaurant_name_text_view.setVisibility(View.VISIBLE);
-                                    }
-                                });
-
-                            }
-                        }
-                        else
-                        {
-                            e.printStackTrace();
-                            runOnUIThreadIfVisible(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    status_textview.setText("Error checando status de dispositivo");
-                                    status_textview.setVisibility(View.VISIBLE);
-                                    loading_prg.setVisibility(View.INVISIBLE);
-                                    register_button.setVisibility(View.VISIBLE);
-                                }
-                            });
-                        }
-                    }
-                });
-
-        */
 
     }// finish checkstatus
 
@@ -329,39 +246,7 @@ public class MainFragment extends Fragment
                     });
 
 
-                    /*
-                    Ion.with(getActivity())
-                            .load(Global.REGISTER_URL)
-                            .setJsonObjectBody(json)
-                            .asJsonObject()
-                            .setCallback(new FutureCallback<JsonObject>()
-                            {
-                                @Override
-                                public void onCompleted(Exception e, JsonObject result)
-                                {
-                                    dialog.dismiss();
 
-                                    Log.i("mbp", "Data callback");
-                                    if (e == null)
-                                    {
-                                        Log.i("mbp", "Register ok: " + result.toString());
-                                        runOnUIThreadIfVisible(new Runnable()
-                                        {
-                                            @Override
-                                            public void run()
-                                            {
-                                                checkStatus();
-                                            }
-                                        });
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getActivity(), "Register error", Toast.LENGTH_LONG).show();
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-                            */
                 }
             }
         });
@@ -423,43 +308,31 @@ public class MainFragment extends Fragment
                 }
             }
         });
-        /*
-        Ion.with(getActivity())
-                .load(String.format(Global.AVERAGE_WAIT_TIME, App.getMacAddress(), "60"))
-                .setLogging("su", Log.VERBOSE)
-                .noCache()
-                .as(CountResponse.class)
-                .setCallback(new FutureCallback<CountResponse>()
-                {
-                    @Override
-                    public void onCompleted(Exception e, final CountResponse result)
-                    {
-                        if (e == null)
-                        {
-                            if (result.getStatus() == 200)
-                            {
-                                Log.i("su", result.getData() + " Segundos");
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        if(average_wait_time_text_view != null) {
-                                            average_wait_time_text_view.setText("Tiempo de espera ultima hora: " + App.prettySeconds(result.getData()));
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                        else
-                        {
-                            Log.i("su", "Error");
-                            e.printStackTrace();
-                        }
-                    }
-                });*/
+        //load messages
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Usuarios");
+        query.whereEqualTo("uuid", App.getMacAddress());
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (object == null) {
+                    Log.d("score", "The getFirst request failed.");
+                    add_message = "Bienvenido %s por favor espere en lo que su mesa esta lista.";
+                    cancel_message = "Lo Sentimos %s su mesa ha sido cancelada, visitenos pronto.";
+                    ready_message = "Hola %s, su mesa esta lista. Favor de avisarle a nuestra hostess.";
+                    ping_message = "%s, le recordamos que su mesa esta lista. Favor de avisarle a nuestra hostess.";
+                } else {
+                    Log.d("score", "Retrieved the object.");
+                    add_message = object.getString("add");
+                    cancel_message = object.getString("cancel");
+                    ready_message = object.getString("ready");
+                    ping_message = object.getString("ping");
+                    Log.d("score", "got the strings");
+
+                }
+            }
+        });
     }
     // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri)
     {
         if (mListener != null)
@@ -598,66 +471,32 @@ public class MainFragment extends Fragment
         });
 
 
-        /*
-        Ion.with(getActivity())
-                .load(String.format(Global.CUSTOMER_LIST, uuid))
-                .setLogging("su",Log.DEBUG)
-                .as(CustomerListReponse.class)
-                .setCallback(new FutureCallback<CustomerListReponse>()
-                {
-                    @Override
-                    public void onCompleted(Exception e, final CustomerListReponse result)
-                    {
-                        if(e != null)
-                        {
-                            e.printStackTrace();
-                            runOnUIThreadIfVisible(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    Toast.makeText(getActivity(), "Error cargando clientes", Toast.LENGTH_LONG).show();
-                                    customer_recylerview.setVisibility(View.INVISIBLE);
-
-                                }
-                            });
-
-                        }
-                        else
-                        {
-                            if(result.getStatus() == 200)
-                            {
-                                Log.i("mbp","Load data ok");
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        customer_recylerview.setVisibility(View.VISIBLE);
-                                        customer_recylerview.setAdapter(new CustomerAdapter2(getActivity(), MainFragment.this ,result.getData()));
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        customer_recylerview.setVisibility(View.INVISIBLE);
-                                    }
-                                });
-
-                            }
-                        }
-                    }
-                });*/
     }//finish load customer
 
-    private void addUser(String name, String phone, final String people, String note, final String uuid)
+    private void addUser(final String name,final String phone, final String people, String note, final String uuid)
     {
-        GcmSender.setTopicMessage("New User", name + " (" + phone+" ) added ");
+        if(!phone.equals("")) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Usuarios");
+            query.whereEqualTo("uuid", App.getMacAddress());
+            query.fromLocalDatastore();
+            query.getFirstInBackground(new GetCallback<ParseObject>() {
+                public void done(ParseObject object, ParseException e) {
+                    if (object == null) {
+                        Log.d("score", "The getFirst request failed.");
+                        String mensaje = ("Bienvenido %s por favor espere en lo que su mesa esta lista.").replace("%s", name);
+                        GcmSender.setTopicMessage(phone, mensaje);
+                    } else {
+                        Log.d("score", "Retrieved the object.");
+                        String mensaje = object.getString("add").replaceAll("%s", name);
+                        GcmSender.setTopicMessage(phone, mensaje);
+
+                    }
+                }
+            });
+        }
+        //String mensaje = add_message.replaceAll("%s", name);
+        Log.d("Messjae", add_message + name);
+
 
         Random rand = new Random();
         Calendar cal = Calendar.getInstance();
@@ -703,66 +542,6 @@ public class MainFragment extends Fragment
             }
         });
 
-        /*
-        final ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("Agregando Cliente...");
-        dialog.setCancelable(false);
-        dialog.show();
-        //server contact
-        Ion.with(getActivity())
-                .load(String.format(Global.CUSTOMER_ADD, uuid))
-                .setBodyParameter("name", name)
-                .setBodyParameter("phone", phone)
-                .setBodyParameter("note", note)
-                .setBodyParameter("number_of_people", people)
-                .as(CustomerResponse.class)
-                .setCallback(new FutureCallback<CustomerResponse>()
-                {
-                    @Override
-                    public void onCompleted(Exception e, final CustomerResponse result)
-                    {
-                        if(e != null)
-                        {
-                            runOnUIThreadIfVisible(new Runnable()
-                            {
-                                @Override
-                                public void run()
-                                {
-                                    dialog.dismiss();
-                                    Toast.makeText(getActivity(), "No se puede agregar cliente", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                        else
-                        {
-                            if(result.getStatus() == 200)
-                            {
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        dialog.dismiss();
-                                        loadCustomer(uuid);
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                runOnUIThreadIfVisible(new Runnable()
-                                {
-                                    @Override
-                                    public void run()
-                                    {
-                                        Toast.makeText(getActivity(), "Error agregando cliente: " + result.getStatus(),Toast.LENGTH_LONG).show();
 
-                                        dialog.dismiss();
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
-        */
     }
 }

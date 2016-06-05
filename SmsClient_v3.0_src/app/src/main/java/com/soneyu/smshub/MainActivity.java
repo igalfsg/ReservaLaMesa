@@ -28,6 +28,9 @@ import com.soneyu.smshub.fragment.MainFragment;
 import com.soneyu.smshub.fragment.OnFragmentInteractionListener;
 import com.soneyu.smshub.fragment.ReportFragment;
 import com.soneyu.smshub.fragment.SeatInfoFragment;
+import com.soneyu.smshub.fragment.WaitTimeGraphReportFragment;
+import com.soneyu.smshub.fragment.WaitTimeTextReportFragment;
+import com.soneyu.smshub.fragment.messagesFragment;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerCallbacks, OnFragmentInteractionListener
@@ -122,19 +125,15 @@ public class MainActivity extends ActionBarActivity
         }/*
         else if(position == 2)
         {
-            WaitTimeTextReportFragment frg = new WaitTimeTextReportFragment();
-            changeFragment(frg);
+
+            WaitTimeGraphReportFragment waitTimeGraphReportFragment = WaitTimeGraphReportFragment.newInstance("p1", "p2");
+            changeFragment(waitTimeGraphReportFragment);
         }*/
         else if(position == 1)
         {
             SeatInfoFragment seatInfoFragment = SeatInfoFragment.newInstance("p1", "p2");
             changeFragment(seatInfoFragment);
-        }/*
-        else if(position == 3)
-        {
-            WaitTimeGraphReportFragment waitTimeGraphReportFragment = WaitTimeGraphReportFragment.newInstance("p1", "p2");
-            changeFragment(waitTimeGraphReportFragment);
-        }*/
+        }
         else if(position == 2)
         {
             ReportFragment reportFragment = new ReportFragment();
@@ -146,8 +145,13 @@ public class MainActivity extends ActionBarActivity
             reportFragment.setRetainInstance(true);
             changeFragment(reportFragment);
         }
-
+        else if(position == 4)
+        {
+            messagesFragment frg = new messagesFragment();
+            changeFragment(frg);
+        }
     }
+
     private void changeFragment(Fragment newFragment)
     {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

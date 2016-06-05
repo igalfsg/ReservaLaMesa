@@ -91,37 +91,7 @@ public class RegistrationIntentService extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
-    /**
-     * Persist registration to third-party servers.
-     *
-     * Modify this method to associate the user's GCM registration token with any server-side account
-     * maintained by your application.
-     *
-     * @param token The new token.
-     */
-    private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
-        //not used
-        Log.i("mbp", "Do registeration");
-        ParseObject new_user = new ParseObject("Usuarios");
-        new_user.put("user", token);
-        new_user.put("uuid", App.getMacAddress());
-        new_user.pinInBackground();
-        new_user.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    //Toast.makeText(Change_Weight.this, "Changed Weights", Toast.LENGTH_SHORT).show();
-                    Log.i("mbp", "registeration");
-                } else {
-                    Log.i("mbp", "messed up registeration");
-                    //Toast.makeText(Change_Weight.this, "Saved on Phone not on network", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-
-    }
 
 
     /**

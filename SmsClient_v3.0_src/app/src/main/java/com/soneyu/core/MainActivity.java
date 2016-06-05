@@ -41,64 +41,13 @@ public class MainActivity extends AppCompatActivity
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
     private BroadcastReceiver mRegistrationBroadcastReceiver;
-
+    public int test;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 
         super.onCreate(savedInstanceState);
-//        setContentView(R.customer_item.activity_main);
-//
-//        Button btn = (Button) findViewById(R.id.activate_button);
-//
-//        final ProgressDialog prgDialog = new ProgressDialog(this);
-//        prgDialog.setCancelable(false);
-//        prgDialog.setMessage("Activating...");
-//
-//
-//        btn.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                if (checkPlayServices())
-//                {
-//                    prgDialog.show();
-//                    // Start IntentService to register this application with GCM.
-//                    Intent intent = new Intent(MainActivity.this, RegistrationIntentService.class);
-//                    startService(intent);
-//                }
-//            }
-//        });
-//
-//
-//        mRegistrationBroadcastReceiver = new BroadcastReceiver()
-//        {
-//            @Override
-//            public void onReceive(Context context, Intent intent)
-//            {
-//                try
-//                {
-//                    SharedPreferences sharedPreferences =
-//                            PreferenceManager.getDefaultSharedPreferences(context);
-//                    boolean sentToken = sharedPreferences
-//                            .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-//                    if (sentToken)
-//                    {
-//                        prgDialog.dismiss();
-//                        Toast.makeText(MainActivity.this, "Activate ok", Toast.LENGTH_LONG).show();
-//                    }
-//                    else
-//                    {
-//                        prgDialog.dismiss();
-//                        Toast.makeText(MainActivity.this, "Activate error", Toast.LENGTH_LONG).show();
-//                    }
-//                }catch (Exception ex)
-//                {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        };
+
 
     }
 

@@ -3,6 +3,7 @@ package com.soneyu.gcmplayground;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,12 +23,17 @@ public class GCMBroadCastReceiver extends BroadcastReceiver {
 
         if (intent.getAction().equals(RegistrationConstants.NEW_DOWNSTREAM_MESSAGE)) {
             Log.d(Constants.GCM_DEBUG, "DownStreem message");
-            String message = intent.getStringExtra(RegistrationConstants.NOTIFICATION_DATA);
+            String phoneNo = intent.getStringExtra(RegistrationConstants.NOTIFICATION_DATA);
             String body =  intent.getStringExtra(RegistrationConstants.NOTIFICATION_BODY);
-            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-
-            Utils.createNotification(context, message, body, "Alert");
-
+            Toast.makeText(context, phoneNo + body, Toast.LENGTH_LONG).show();
+            Log.d("tag here", "Message: Igal is hot af " + phoneNo + body);
+            Utils.createNotification(context, phoneNo, body, "Alert");
+           SmsManager smsManager = SmsManager.getDefault();
+            try {
+                smsManager.sendTextMessage(phoneNo, null, body, null, null);
+            }catch (Exception e){
+                Log.d("exception", e.toString());
+            }
         }
 
     }
